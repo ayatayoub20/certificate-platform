@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+    <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+<form method="POST" action="/login" class="bg-white p-6 rounded-xl w-80">
+  <h2 class="text-xl mb-4">تسجيل الدخول</h2>
+
+  <% if (error) { %>
+    <p class="text-red-500"><%= error %></p>
+  <% } %>
+
+  <input name="email" placeholder="Email" class="w-full mb-3 p-2 border rounded" required>
+  <input name="password" type="password" placeholder="Password" class="w-full mb-3 p-2 border rounded" required>
+
+  <button class="w-full bg-green-600 text-white p-2 rounded">دخول</button>
+</form>
+
+</body>
+</html>

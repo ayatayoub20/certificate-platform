@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التحقق من الشهادة</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/verify.css">
+</head>
+<body>
+  <div class="verify-page">
+    <div class="verify-shell">
+
+      <header class="verify-top-header">
+        <div class="right-brand">
+          <img src="/images/mewa.svg" alt="وزارة البيئة والمياه والزراعة" />
+          <div class="brand-text">
+            <div class="ar">وزارة البيئة والمياه والزراعة</div>
+            <div class="en">Ministry of Environment Water &amp; Agriculture</div>
+          </div>
+        </div>
+
+        <div class="left-logo">
+          <img src="/images/Hsr-colored-logo.png" alt="HSR" />
+        </div>
+      </header>
+
+      <section class="verify-blue-band">
+        <div class="verify-title-box">
+          شهادة تسجيل موقع زراعي
+        </div>
+
+        <% if (!isValid || !certificate) { %>
+          <div class="invalid-card">
+            <h2>الشهادة غير صالحة</h2>
+            <p>لم يتم العثور على شهادة مطابقة لرمز التحقق هذا.</p>
+          </div>
+        <% } else { %>
+          <div class="verify-main-card">
+
+            <div style="display:flex; justify-content:flex-end;">
+              <div class="section-label">
+                <span class="dot"></span>
+                بيانات الشهادة
+              </div>
+            </div>
+
+            <div class="info-grid">
+              <div class="info-box">
+                <span class="label">اسم المالك</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.fullName %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">رقم الشهادة</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.certificateNumber %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">تاريخ الإصدار</span>
+                <span class="sep">|</span>
+                <span class="value">
+                  <%= new Date(certificate.issueDate).toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true
+                  }) %>
+                </span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">تاريخ الإنتهاء</span>
+                <span class="sep">|</span>
+                <span class="value">
+                  <%= new Date(certificate.expiryDate).toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true
+                  }) %>
+                </span>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; margin-top: 22px;">
+              <div class="section-label">
+                <span class="dot"></span>
+                بيانات الموقع الزراعي
+              </div>
+            </div>
+
+            <div class="info-grid">
+              <div class="info-box">
+                <span class="label">رقم الحيازة</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.farmCode %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">المنطقة</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.region %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">المحافظة</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.governorate %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">المركز</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.center || "-" %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">النشاط الرئيسي</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.mainActivity %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">المساحة الكلية</span>
+                <span class="sep">|</span>
+                <span class="value"><%= Number(certificate.totalArea).toFixed(8) %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">نوع وثيقة الملكية</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.ownershipDocumentType || "-" %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">تاريخ وثيقة الملكية</span>
+                <span class="sep">|</span>
+                <span class="value">
+                  <%= certificate.ownershipDocumentDate
+                    ? new Date(certificate.ownershipDocumentDate).toLocaleDateString("en-CA")
+                    : "-" %>
+                </span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">إحداثيات الطول</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.longitude %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">إحداثيات العرض</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.latitude %></span>
+              </div>
+
+              <div class="info-box">
+                <span class="label">رقم وثيقة الملكية</span>
+                <span class="sep">|</span>
+                <span class="value"><%= certificate.ownershipDocumentNumber || "-" %></span>
+              </div>
+            </div>
+
+            <div class="verify-footer">
+              جميع الحقوق محفوظة - وزارة البيئة والمياه والزراعة، مشروع تطوير السجل الزراعي © 2026
+            </div>
+          </div>
+        <% } %>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

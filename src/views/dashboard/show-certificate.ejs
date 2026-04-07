@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عرض الشهادة</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-100 min-h-screen">
+
+  <div class="max-w-5xl mx-auto px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-slate-800">عرض الشهادة</h1>
+      <a href="/dashboard" class="px-4 py-2 bg-slate-700 text-white rounded-lg">رجوع</a>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow border border-slate-200 p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">اسم المالك</p>
+          <p class="text-slate-800"><%= certificate.fullName %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">الهوية الوطنية</p>
+          <p class="text-slate-800"><%= certificate.nationalId %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">رقم الشهادة</p>
+          <p class="text-slate-800"><%= certificate.certificateNumber %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">رقم الحيازة / كود المزرعة</p>
+          <p class="text-slate-800"><%= certificate.farmCode %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">المنطقة</p>
+          <p class="text-slate-800"><%= certificate.region %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">المحافظة</p>
+          <p class="text-slate-800"><%= certificate.governorate %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">المركز</p>
+          <p class="text-slate-800"><%= certificate.center || "-" %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">النشاط الرئيسي</p>
+          <p class="text-slate-800"><%= certificate.mainActivity %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">المساحة الكلية</p>
+          <p class="text-slate-800"><%= certificate.totalArea %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">إحداثيات العرض</p>
+          <p class="text-slate-800"><%= certificate.latitude %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">إحداثيات الطول</p>
+          <p class="text-slate-800"><%= certificate.longitude %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">رقم السجل</p>
+          <p class="text-slate-800"><%= certificate.registryNumber %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">نوع وثيقة الملكية</p>
+          <p class="text-slate-800"><%= certificate.ownershipDocumentType || "-" %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">رقم وثيقة الملكية</p>
+          <p class="text-slate-800"><%= certificate.ownershipDocumentNumber || "-" %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">تاريخ وثيقة الملكية</p>
+          <p class="text-slate-800">
+            <%= certificate.ownershipDocumentDate ? new Date(certificate.ownershipDocumentDate).toLocaleDateString("en-GB") : "-" %>
+          </p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">تاريخ الإصدار</p>
+          <p class="text-slate-800"><%= new Date(certificate.issueDate).toLocaleDateString("en-GB") %></p>
+        </div>
+
+        <div class="border rounded-lg p-4">
+          <p class="text-sm text-slate-500 mb-1">تاريخ الانتهاء</p>
+          <p class="text-slate-800"><%= new Date(certificate.expiryDate).toLocaleDateString("en-GB") %></p>
+        </div>
+
+        <div class="border rounded-lg p-4 md:col-span-2">
+          <p class="text-sm text-slate-500 mb-2">رابط التحقق</p>
+          <a href="<%= certificate.verificationUrl %>" target="_blank" class="text-blue-700 break-all">
+            <%= certificate.verificationUrl %>
+          </a>
+        </div>
+
+        <div class="border rounded-lg p-4 md:col-span-2 flex justify-center">
+          <img src="<%= certificate.qrCodeDataUrl %>" alt="QR Code" class="w-52 h-52 object-contain" />
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/certificates/<%= certificate._id %>/edit" class="px-4 py-2 rounded-lg bg-amber-500 text-white">
+          تعديل
+        </a>
+
+        <a href="/verify/<%= certificate.verificationToken %>" target="_blank" class="px-4 py-2 rounded-lg bg-blue-600 text-white">
+          فتح صفحة التحقق
+        </a>
+
+        <form action="/certificates/<%= certificate._id %>/delete" method="POST" onsubmit="return confirm('هل أنت متأكد من حذف هذه الشهادة؟');">
+          <button type="submit" class="px-4 py-2 rounded-lg bg-red-600 text-white">
+            حذف
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

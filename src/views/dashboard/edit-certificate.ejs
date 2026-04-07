@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تعديل الشهادة</title>
+    <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+
+  <div class="max-w-5xl mx-auto px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-slate-800">تعديل الشهادة</h1>
+      <a href="/dashboard" class="px-4 py-2 bg-slate-700 text-white rounded-lg">رجوع</a>
+    </div>
+
+    <form action="/certificates/<%= certificate._id %>/update" method="POST" class="bg-white p-6 rounded-2xl shadow space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">اسم المالك</label>
+          <input name="fullName" value="<%= certificate.fullName %>" placeholder="اسم المالك" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">الهوية الوطنية</label>
+          <input name="nationalId" value="<%= certificate.nationalId %>" placeholder="الهوية الوطنية" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">رقم الشهادة</label>
+          <input name="certificateNumber" value="<%= certificate.certificateNumber %>" placeholder="رقم الشهادة" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">رقم الحيازة / كود المزرعة</label>
+          <input name="farmCode" value="<%= certificate.farmCode %>" placeholder="رقم الحيازة / كود المزرعة" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">المنطقة</label>
+          <input name="region" value="<%= certificate.region %>" placeholder="المنطقة" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">المحافظة</label>
+          <input name="governorate" value="<%= certificate.governorate %>" placeholder="المحافظة" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">المركز</label>
+          <input name="center" value="<%= certificate.center || '' %>" placeholder="المركز" class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">النشاط الرئيسي</label>
+          <input name="mainActivity" value="<%= certificate.mainActivity %>" placeholder="النشاط الرئيسي" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">المساحة الكلية</label>
+          <input name="totalArea" type="number" step="any" value="<%= certificate.totalArea %>" placeholder="المساحة الكلية" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">إحداثيات العرض</label>
+          <input name="latitude" type="number" step="any" value="<%= certificate.latitude %>" placeholder="إحداثيات العرض" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">إحداثيات الطول</label>
+          <input name="longitude" type="number" step="any" value="<%= certificate.longitude %>" placeholder="إحداثيات الطول" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">رقم السجل</label>
+          <input name="registryNumber" value="<%= certificate.registryNumber %>" placeholder="رقم السجل" required class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">نوع وثيقة الملكية</label>
+          <input name="ownershipDocumentType" value="<%= certificate.ownershipDocumentType || '' %>" placeholder="نوع وثيقة الملكية" class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">رقم وثيقة الملكية</label>
+          <input name="ownershipDocumentNumber" value="<%= certificate.ownershipDocumentNumber || '' %>" placeholder="رقم وثيقة الملكية" class="w-full border rounded-lg p-3" />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">تاريخ وثيقة الملكية</label>
+          <input
+            name="ownershipDocumentDate"
+            type="date"
+            value="<%= certificate.ownershipDocumentDate ? new Date(certificate.ownershipDocumentDate).toISOString().split('T')[0] : '' %>"
+            class="w-full border rounded-lg p-3"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">تاريخ الإصدار</label>
+          <input
+            name="issueDate"
+            type="date"
+            value="<%= new Date(certificate.issueDate).toISOString().split('T')[0] %>"
+            required
+            class="w-full border rounded-lg p-3"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-700">تاريخ الانتهاء</label>
+          <input
+            name="expiryDate"
+            type="date"
+            value="<%= new Date(certificate.expiryDate).toISOString().split('T')[0] %>"
+            required
+            class="w-full border rounded-lg p-3"
+          />
+        </div>
+
+      </div>
+
+      <button type="submit" class="bg-amber-600 text-white px-6 py-3 rounded-lg">
+        حفظ التعديلات
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
