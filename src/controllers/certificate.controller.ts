@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import QRCode from "qrcode";
 import Certificate from "../models/Certificate";
 import { generateVerificationToken } from "../utils/generateToken";
+import { generatePdfFromUrl } from "../utils/pdf";
 
 export const getDashboard = async (req: Request, res: Response) => {
   try {
@@ -165,7 +166,22 @@ export const getCertificateDetailsPage = async (req: Request, res: Response) => 
     return res.status(500).send("Server Error");
   }
 };
+export const getCertificatePage = async (req: Request, res: Response) => {
+  try {
+    const certificate = await Certificate.findById(req.params.id);
 
+    if (!certificate) {
+      return res.status(404).send("Certificate not found");
+    }
+
+    return res.render("certificates/certificate", {
+      certificate,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Server Error");
+  }
+};
 export const deleteCertificate = async (req: Request, res: Response) => {
   try {
     const certificate = await Certificate.findById(req.params.id);
@@ -203,5 +219,32 @@ export const verifyCertificatePage = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     return res.status(500).send("Server Error");
+  }
+};
+
+export const downloadCertificatePdf = async (req: Request, res: Response) => {
+  try {
+    const certificate = await Certificate.findById(req.params.id);
+
+    if (!certificate) {
+      return res.status(404).send("Certificate not found");
+    }
+
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
+    const certificateUrl = `${baseUrl}/certificates/${certificate._id}`;
+
+    const pdfBuffer = await generatePdfFromUrl(certificateUrl);
+
+    const fileName = `certificate.pdf`;
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
+    res.setHeader("Content-Length", pdfBuffer.length.toString());
+
+    return res.end(pdfBuffer);
+  } catch (error) {
+    console.error("PDF generation error:", error);
+    return res.status(500).send("Error generating PDF");
   }
 };

@@ -9,6 +9,8 @@ import {
   getCertificateDetailsPage,
   deleteCertificate,
   verifyCertificatePage,
+  getCertificatePage,
+  downloadCertificatePdf,
 } from "../controllers/certificate.controller";
 
 const router = Router();
@@ -18,10 +20,14 @@ router.get("/dashboard", isAuthenticated, getDashboard);
 router.get("/certificates/new", isAuthenticated, getNewCertificatePage);
 router.post("/certificates", isAuthenticated, createCertificate);
 
-router.get("/certificates/:id", isAuthenticated, getCertificateDetailsPage);
+router.get("/certificates/:id", getCertificatePage);
+router.get("/certificates/details/:id", isAuthenticated, getCertificateDetailsPage);
+
 router.get("/certificates/:id/edit", isAuthenticated, getEditCertificatePage);
 router.post("/certificates/:id/update", isAuthenticated, updateCertificate);
 router.post("/certificates/:id/delete", isAuthenticated, deleteCertificate);
+router.get("/certificates/:id/pdf", downloadCertificatePdf);
+
 
 router.get("/verify/:token", verifyCertificatePage);
 

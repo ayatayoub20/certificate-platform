@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شهادة تسجيل موقع زراعي</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  @page {
+    margin: 0;
+    size: A4;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 210mm;
+    height: 297mm;
+    background: white;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+  }
+
+  .cert-wrapper {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cert-container {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    background: url('/images/certificate.png') center/100% 100% no-repeat;
+    background-color: #fff;
+    overflow: hidden;
+    color: #1a202c;
+    box-shadow: none;
+  }
+
+  .print-btn {
+    display: none;
+  }
+
+  .data-field {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .data-reg {
+    position: absolute;
+    top: 6.7%;
+    padding-top: 5px;
+    left: 8%;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .data-issue {
+    position: absolute;
+    top: 8.2%;
+    left: 5%;
+    font-size: 12px;
+    padding-top: 2px;
+    padding-left: 8px;
+    font-weight: 600;
+  }
+
+  .data-expiry {
+    position: absolute;
+    top: 9.7%;
+    left: 5%;
+    font-size: 12px;
+    padding-top: 2px;
+    padding-left: 8px;
+    font-weight: 600;
+  }
+
+  .data-name       { top: 38.6%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+  .data-id         { top: 43.1%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+  .data-farm       { top: 47.5%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+  .data-region     { top: 51.2%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+  .data-gov        { top: 55.6%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+  .data-activity   { top: 60.2%; right: 26.5%; width: 68%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+  .data-area       { top: 64.7%; right: 26.5%; width: 68%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+  .data-lat        { top: 69.2%; right: 26.5%; width: 33.5%; height: 4.1%; }
+  .data-lng        { top: 69.2%; right: 60%; width: 34.5%; height: 4.1%; }
+
+  .qr-box {
+    position: absolute;
+    top: 43.5%;
+    left: 6.5%;
+    width: 17%;
+    height: 16%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .qr-box img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    left: 58%;
+    object-fit: contain;
+  }
+</style>
+</head>
+<body>
+
+  <div class="cert-wrapper">
+
+    <div class="cert-container">
+
+      <!-- Top Left Elements -->
+      <div class="data-reg"><%= certificate.registryNumber %></div>
+      <div class="data-issue"><%= new Date(certificate.issueDate).toLocaleDateString("en-GB") %></div>
+      <div class="data-expiry"><%= new Date(certificate.expiryDate).toLocaleDateString("en-GB") %></div>
+
+      <!-- Table Row Elements -->
+      <div class="data-field data-name"><%= certificate.fullName %></div>
+      <div class="data-field data-id"><%= certificate.nationalId %></div>
+      <div class="data-field data-farm"><%= certificate.farmCode %></div>
+      <div class="data-field data-region"><%= certificate.region %></div>
+      <div class="data-field data-gov"><%= certificate.governorate %></div>
+
+      <div class="data-field data-activity"><%= certificate.mainActivity %></div>
+      <div class="data-field data-area"><%= Number(certificate.totalArea).toFixed(8) %></div>
+      
+      <div class="data-field data-lat"><%= certificate.latitude %></div>
+      <div class="data-field data-lng"><%= certificate.longitude %></div>
+
+      <!-- QR Code Element -->
+      <div class="qr-box">
+        <img src="<%= certificate.qrCodeDataUrl %>" alt="QR Code" />
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
