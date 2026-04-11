@@ -44,7 +44,7 @@ export const createCertificate = async (req: Request, res: Response) => {
     } = req.body;
 
     const verificationToken = generateVerificationToken();
-    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.BASE_URL;
     const verificationUrl = `${baseUrl}/verify/${verificationToken}`;
     const qrCodeDataUrl = await QRCode.toDataURL(verificationUrl);
 
