@@ -230,7 +230,7 @@ export const downloadCertificatePdf = async (req: Request, res: Response) => {
       return res.status(404).send("Certificate not found");
     }
 
-    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.BASE_URL;
 
     const certificateUrl = `${baseUrl}/certificates/${certificate._id}`;
 

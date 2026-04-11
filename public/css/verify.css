@@ -34,11 +34,10 @@ body {
   background: var(--white);
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
-  padding: 20px 50px;
+  padding: 20px 40px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 40vw; /* Adjust gap to bring left logo closer to the right */
+  justify-content: space-between;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
   position: relative;
   z-index: 10;
@@ -163,12 +162,12 @@ body {
   min-height: 50px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 10px 15px;
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.04);
   font-size: 14px;
   color: var(--text);
-  white-space: nowrap;
+  word-break: break-word;
 }
 
 .info-box .label {
@@ -208,40 +207,78 @@ body {
   margin: 0 0 12px;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
   .info-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+  .verify-top-header {
+    padding: 15px 30px;
+  }
 }
 
-@media (max-width: 980px) {
-  .verify-top-header {
-    padding: 15px 25px;
-  }
-  .verify-top-header .left-logo img,
-  .verify-top-header .right-brand img {
-    height: 60px;
-  }
-  .brand-text .ar { font-size: 18px; }
-  .brand-text .en { font-size: 12px; }
+@media (max-width: 992px) {
   .info-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .verify-top-header .right-brand img {
+    height: 75px;
+  }
+  .verify-top-header .left-logo img {
+    height: 65px;
+  }
+  .brand-text .ar { font-size: 18px; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .verify-shell {
+    width: 95%;
+  }
+  .verify-main-card {
+    padding: 20px;
+  }
   .verify-top-header {
-    flex-direction: column;
-    text-align: center;
+    padding: 15px 20px;
+  }
+  .verify-blue-band::before {
+    height: 100%;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .verify-top-header {
+    justify-content: flex-start;
+    border-radius: 0 0 25px 25px;
   }
   .verify-top-header .right-brand {
-    flex-direction: column-reverse;
+    display: none;
   }
-  .brand-text { text-align: center; }
   .info-grid {
     grid-template-columns: 1fr;
   }
   .info-box {
-    justify-content: flex-start;
+    padding: 12px;
+  }
+  .verify-title-box {
+    font-size: 16px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .verify-main-card {
+    padding: 15px;
+  }
+  .info-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .info-box .sep {
+    display: none;
+  }
+  .verify-footer {
+    font-size: 12px;
   }
 }
