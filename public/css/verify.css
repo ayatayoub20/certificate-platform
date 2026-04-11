@@ -83,13 +83,13 @@ body {
   z-index: 5;
 }
 
-/* The background extending 70% over the form */
+/* The background extending over the form */
 .verify-blue-band::before {
   content: "";
   position: absolute;
   top: -40px; 
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   height: 80%; 
   background: url("/images/home-image.jpg") center top/cover no-repeat;
   border-bottom-left-radius: 40px;
@@ -131,14 +131,14 @@ body {
 .section-label {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: var(--green);
   color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 16px;
+  padding: 6px 16px;
+  border-radius: 12px 0 12px 0;
+  font-size: 14px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 .section-label .dot {
@@ -247,6 +247,17 @@ body {
 }
 
 @media (max-width: 600px) {
+  .verify-shell {
+    width: 98%;
+  }
+  .verify-blue-band {
+    padding: 20px 10px;
+  }
+  .verify-blue-band::before {
+    height: 15%;
+    left: 2px;
+    right: 2px;
+  }
   .verify-top-header {
     justify-content: flex-start;
     border-radius: 0 0 25px 25px;
@@ -258,27 +269,45 @@ body {
     grid-template-columns: 1fr;
   }
   .info-box {
-    padding: 12px;
+    padding: 10px;
+    font-size: 12px;
+    min-height: 45px;
   }
   .verify-title-box {
     font-size: 16px;
-    padding: 15px;
+    padding: 15px 12px;
+    margin-bottom: 20px;
   }
 }
 
 @media (max-width: 480px) {
+  .verify-shell {
+    width: 100%;
+  }
+  .verify-title-box {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .verify-blue-band {
+    padding: 15px 6px;
+  }
   .verify-main-card {
-    padding: 15px;
+    padding: 15px 10px;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .info-box {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
+    padding: 8px 10px;
+    font-size: 11px;
+    min-height: 40px;
   }
   .info-box .sep {
-    display: none;
+    margin: 0 4px;
+    display: inline;
   }
   .verify-footer {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
