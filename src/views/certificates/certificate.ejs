@@ -4,130 +4,144 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>شهادة تسجيل موقع زراعي</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css">
-<style>
-  @page {
-    margin: 0;
-    size: A4;
-  }
 
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    width: 210mm;
-    height: 297mm;
-    background: white;
-    overflow: hidden;
-  }
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
 
-  body {
-    font-family: 'Noto Kufi Arabic', sans-serif;
-  }
+  <style>
+    @page {
+      margin: 0;
+      size: A4;
+    }
 
-  .cert-wrapper {
-    width: 210mm;
-    height: 297mm;
-    margin: 0;
-    padding: 0;
-  }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 210mm;
+      height: 297mm;
+      background: white;
+      overflow: hidden;
+    }
 
-  .cert-container {
-    position: relative;
-    width: 210mm;
-    height: 297mm;
-    background: url('/images/certificate.png') center/100% 100% no-repeat;
-    background-color: #fff;
-    overflow: hidden;
-    color: #1a202c;
-    box-shadow: none;
-  }
+    body {
+      font-family: 'Noto Kufi Arabic', sans-serif;
+    }
 
-  .print-btn {
-    display: none;
-  }
+    .cert-wrapper {
+      width: 210mm;
+      height: 297mm;
+      margin: 0;
+      padding: 0;
+    }
 
-  .data-field {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-  }
+    .cert-container {
+      position: relative;
+      width: 210mm;
+      height: 297mm;
+      background: url('/images/certificate.png') center/100% 100% no-repeat;
+      background-color: #fff;
+      overflow: hidden;
+      color: #1a202c;
+      box-shadow: none;
+    }
 
-  .data-reg {
-    position: absolute;
-    top: 6.7%;
-    padding-top: 5px;
-    left: 8%;
-    font-size: 12px;
-    font-weight: 600;
-  }
+    .print-btn {
+      display: none;
+    }
 
-  .data-issue {
-    position: absolute;
-    top: 8.2%;
-    left: 5%;
-    font-size: 12px;
-    padding-top: 2px;
-    padding-left: 8px;
-    font-weight: 600;
-  }
+    /* 🔥 الجزء الجديد (أعلى اليسار) */
+    .top-left-info {
+      position: absolute;
+      top: 7.3%;
+      left: 3.8%;
+      width: 23%;
+      direction: rtl;
+      text-align: right;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: #1a202c;
+    }
 
-  .data-expiry {
-    position: absolute;
-    top: 9.7%;
-    left: 5%;
-    font-size: 12px;
-    padding-top: 2px;
-    padding-left: 8px;
-    font-weight: 600;
-  }
+    .top-left-info .info-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 2px;
+      white-space: nowrap;
+    }
 
-  .data-name       { top: 38.6%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
-  .data-id         { top: 43.1%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
-  .data-farm       { top: 47.5%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
-  .data-region     { top: 51.2%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
-  .data-gov        { top: 55.6%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
-  .data-activity   { top: 60.2%; right: 26.5%; width: 68%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
-  .data-area       { top: 64.7%; right: 26.5%; width: 68%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
-  .data-lat        { top: 69.2%; right: 26.5%; width: 33.5%; height: 4.1%; }
-  .data-lng        { top: 69.2%; right: 60%; width: 34.5%; height: 4.1%; }
+    .top-left-info .label {
+      min-width: 78px;
+      text-align: right;
+    }
 
-  .qr-box {
-    position: absolute;
-    top: 43.5%;
-    left: 6.5%;
-    width: 17%;
-    height: 16%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    .top-left-info .value {
+      text-align: right;
+    }
 
-  .qr-box img {
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
-    left: 58%;
-    object-fit: contain;
-  }
-</style>
+    /* باقي البيانات */
+    .data-field {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .data-name       { top: 38.6%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+    .data-id         { top: 43.1%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+    .data-farm       { top: 47.5%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+    .data-region     { top: 51.2%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+    .data-gov        { top: 55.6%; right: 26.5%; width: 38%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+
+    .data-activity   { top: 60.2%; right: 26.5%; width: 68%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+    .data-area       { top: 64.7%; right: 26.5%; width: 68%; height: 4.1%; justify-content: flex-start; padding-right: 15px; }
+
+    .data-lat        { top: 69.2%; right: 26.5%; width: 33.5%; height: 4.1%; }
+    .data-lng        { top: 69.2%; right: 60%; width: 34.5%; height: 4.1%; }
+
+    .qr-box {
+      position: absolute;
+      top: 43.5%;
+      left: 6.5%;
+      width: 17%;
+      height: 16%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .qr-box img {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      left: 58%;
+      object-fit: contain;
+    }
+  </style>
 </head>
+
 <body>
 
   <div class="cert-wrapper">
-
     <div class="cert-container">
 
-      <!-- Top Left Elements -->
-      <div class="data-reg"><%= certificate.registryNumber %></div>
-      <div class="data-issue"><%= new Date(certificate.issueDate).toLocaleDateString("en-GB") %></div>
-      <div class="data-expiry"><%= new Date(certificate.expiryDate).toLocaleDateString("en-GB") %></div>
+      <!-- 🔥 Top Left (معدل) -->
+      <div class="top-left-info">
+        <div class="info-row">
+          <span class="value"><%= certificate.registryNumber %></span>
+        </div>
+        <div class="info-row">
+          <span class="value"><%= new Date(certificate.issueDate).toLocaleDateString("en-GB") %></span>
+        </div>
+        <div class="info-row">
+          <span class="value"><%= new Date(certificate.expiryDate).toLocaleDateString("en-GB") %></span>
+        </div>
+      </div>
 
-      <!-- Table Row Elements -->
+      <!-- باقي البيانات -->
       <div class="data-field data-name"><%= certificate.fullName %></div>
       <div class="data-field data-id"><%= certificate.nationalId %></div>
       <div class="data-field data-farm"><%= certificate.farmCode %></div>
@@ -136,11 +150,11 @@
 
       <div class="data-field data-activity"><%= certificate.mainActivity %></div>
       <div class="data-field data-area"><%= Number(certificate.totalArea).toFixed(8) %></div>
-      
+
       <div class="data-field data-lat"><%= certificate.latitude %></div>
       <div class="data-field data-lng"><%= certificate.longitude %></div>
 
-      <!-- QR Code Element -->
+      <!-- QR -->
       <div class="qr-box">
         <img src="<%= certificate.qrCodeDataUrl %>" alt="QR Code" />
       </div>
